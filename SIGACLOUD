@@ -1,0 +1,41 @@
+# -*- coding: utf-8 -*-
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoAlertPresentException
+from selenium.webdriver.support import expected_conditions as EC
+import unittest, time, re
+
+class UntitledTestCase(unittest.TestCase):
+     def setUp(self):
+        self.driver = webdriver.Chrome()
+        self.driver.implicitly_wait(30)
+        self.base_url = "https://www.google.com/"
+        self.verificationErrors = []
+        self.accept_next_alert = True
+
+     def test_untitled_test_case(self):
+        driver = self.driver
+        driver.get("http://sigacloud2.mapstrategic.mx/alertacloud/siga.html")
+        time.sleep(1)
+        driver.switch_to.frame(driver.find_element_by_xpath("//*[@id='siga']"))
+        time.sleep(1)
+        print("dentro del iframe")
+        driver.find_element_by_id("sidepanelsearchsigacontrol").click()
+        time.sleep(1)
+        alcaldia = driver.find_element_by_id("cmbMunicipio_I").click()
+        time.sleep(1)
+        alcaldia = driver.find_element_by_id("cmbMunicipio_L_LBI0LBL").click()
+        time.sleep(3)
+
+        colonia = driver.find_element_by_id("cmbColonia_I").send_keys("LOS REYES")
+        print("Buscando la colonia")
+        time.sleep(1)
+        colonia1 = driver.find_element_by_id("cmbColonia_L").click()
+        time.sleep(1)
+
+        buscar = driver.find_element_by_xpath("//*[@id='default-tab-1']/div[9]/div[1]").click()
+        time.sleep(1)
+        print("final")
